@@ -6,3 +6,7 @@ func IntMin(a, b int) int {
 	}
 	return b
 }
+
+func GetHelloWorldString() string {
+	return "Hello World"
+}
