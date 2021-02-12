@@ -1,3 +1,3 @@
-[![codecov](https://codecov.io/gh/EgorKorol/test-coverage/branch/main/graph/badge.svg?token=SOURYVWICV)](https://codecov.io/gh/EgorKorol/test-coverage)
+[![Coverage Status](https://coveralls.io/repos/github/EgorKorol/test-coverage/badge.svg)](https://coveralls.io/github/EgorKorol/test-coverage)
 
 ## Test coverage test :)

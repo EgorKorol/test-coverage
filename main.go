@@ -10,3 +10,7 @@ func IntMin(a, b int) int {
 func GetHelloWorldString() string {
 	return "Hello World"
 }
+
+func GetStringString() string {
+	return "String"
+}
