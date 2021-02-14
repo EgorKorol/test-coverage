@@ -1,27 +1,34 @@
-name: Test
+name: CodeCov
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
 
 jobs:
-  test-coverage:
-    name: Test coverage
-    runs-on: [ubuntu-latest]
+  cd:
+    name: CodeCov
+    runs-on: ubuntu-latest
     steps:
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.15
+        id: go
 
-    - name: Set up Go 1.15
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.15
-      id: go
-      
-    - name: Check out code
-      uses: actions/checkout@v2
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
 
-    - name: Run testing
-    - run: go test -v -coverprofile=profile.cov ./...
+      - name: Test
+        run: go test -coverprofile=coverage.out -covermode=count ./...
 
-    - name: Send coverage
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: profile.cov
+      - name: Make Coverage Badge
+        run: .github/workflows/coverage.sh build/coverage/coverage.svg
+
+      - name: Deploy badge
+        # Only once from master
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3.7.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/coverage
+          keep_files: true
