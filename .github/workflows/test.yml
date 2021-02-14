@@ -37,7 +37,7 @@ jobs:
 
       - name: Deploy badge
         # Only once from master
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
