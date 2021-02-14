@@ -9,6 +9,10 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: '1.15'
+    - name: Set up GOPATH
+      run: |
+        echo "GOPATH=${{ github.workspace }}" >> "$GITHUB_ENV"
+        echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
     - name: Check out code
       uses: actions/checkout@v2
     - name: Run Unit tests
