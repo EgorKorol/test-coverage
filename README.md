@@ -1,4 +1,4 @@
-![cod cov](http://$SOME_BACKET.storage.googleapis.com/$PROJECT_NAME/codcov.svg)
+![cod cov](https://egorkorol.github.io/test-coverage/coverage.svg)
 
 
 ## Test coverage test :)
