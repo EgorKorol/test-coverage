@@ -9,19 +9,23 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: '1.15'
-    - name: Set up GOPATH
-      run: |
-        echo "GOPATH=${{ github.workspace }}" >> "$GITHUB_ENV"
-        echo "${{ github.workspace }}/bin" >> "$GITHUB_PATH"
     - name: Check out code
       uses: actions/checkout@v2
+
     - name: Run Unit tests
-      run: go test -covermode atomic -coverprofile=covprofile ./...
-    - name: Install goveralls
-      env:
-        GO111MODULE: off
-      run: go get github.com/mattn/goveralls
+    - run: go test -v -coverprofile=profile.cov ./...
+
     - name: Send coverage
-      env:
-        COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: goveralls -coverprofile=covprofile -service=github
+      uses: shogo82148/actions-goveralls@v1
+      with:
+        path-to-profile: profile.cov
+        flag-name: Go-15
+        parallel: true
+  # notifies that all test jobs are finished.
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shogo82148/actions-goveralls@v1
+        with:
+          parallel-finished: true
