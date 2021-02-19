@@ -9,15 +9,14 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: '1.15'
+
     - name: Check out code
       uses: actions/checkout@v2
+
     - name: Run Unit tests
-      run: |
-        go test -race -covermode atomic -coverprofile=covprofile ./...
-    - name: Install goveralls
-      run: go get github.com/mattn/goveralls
+      run: go test ./... -race -covermode atomic -coverprofile=covprofile
+
     - name: Send coverage
       uses: shogo82148/actions-goveralls@v1
       with:
         path-to-profile: covprofile
-        working-directory: ./
