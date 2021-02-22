@@ -21,5 +21,7 @@ jobs:
 
     - name: Send coverage
       uses: shogo82148/actions-goveralls@v1
+      env:
+        GO111MODULE: on
       with:
         path-to-profile: profile.cov
